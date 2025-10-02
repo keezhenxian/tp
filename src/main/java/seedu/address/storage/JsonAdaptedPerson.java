@@ -100,9 +100,9 @@ class JsonAdaptedPerson {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Remark.class.getSimpleName()));
         }
 
-        final Remark modelRemark = new Remark(remark);
-
         final Address modelAddress = new Address(address);
+
+        final Remark modelRemark = new Remark("");
 
         final Set<Tag> modelTags = new HashSet<>(personTags);
 

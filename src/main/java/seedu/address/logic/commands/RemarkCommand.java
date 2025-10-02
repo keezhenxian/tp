@@ -25,7 +25,8 @@ public class RemarkCommand extends Command {
         + "Existing remark will be overwritten by the input.\n"
         + "Parameters: INDEX (must be a positive integer) "
         + PREFIX_REMARK + "[REMARK]\n"
-        + "Example: " + COMMAND_WORD + " 1 " + PREFIX_REMARK + "Likes to swim.";
+        + "Example: " + COMMAND_WORD + " 1 "
+        + PREFIX_REMARK + "Likes to swim.";
 
     public static final String MESSAGE_ADD_REMARK_SUCCESS = "Added remark to Person: %1$s";
     public static final String MESSAGE_DELETE_REMARK_SUCCESS = "Removed remark from Person: %1$s";
@@ -34,15 +35,15 @@ public class RemarkCommand extends Command {
     private final Remark remark;
 
     /**
-     * @param index  of the person in the filtered person list to edit the remark
+     * @param index of the person in the filtered person list to edit the remark
      * @param remark of the person to be updated to
      */
-    public RemarkCommand(Index index, String remark) {
+    public RemarkCommand(Index index, Remark remark) {
         requireAllNonNull(index, remark);
+
         this.index = index;
         this.remark = remark;
     }
-
     @Override
     public CommandResult execute(Model model) throws CommandException {
         List<Person> lastShownList = model.getFilteredPersonList();
@@ -52,14 +53,8 @@ public class RemarkCommand extends Command {
         }
 
         Person personToEdit = lastShownList.get(index.getZeroBased());
-        Person editedPerson = new Person(
-            personToEdit.getName(),
-            personToEdit.getPhone(),
-            personToEdit.getEmail(),
-            personToEdit.getAddress(),
-            remark,
-            personToEdit.getTags()
-        );
+        Person editedPerson = new Person(personToEdit.getName(), personToEdit.getPhone(), personToEdit.getEmail(),
+            personToEdit.getAddress(), remark, personToEdit.getTags());
 
         model.setPerson(personToEdit, editedPerson);
         model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
@@ -68,13 +63,11 @@ public class RemarkCommand extends Command {
     }
 
     /**
-     * Generates a command execution success message based on whether the remark is added to
-     * or removed from {@code personToEdit}.
+     * Generates a command execution success message based on whether the remark is added to or removed from
+     * {@code personToEdit}.
      */
     private String generateSuccessMessage(Person personToEdit) {
-        String message = !remark.value.isEmpty()
-            ? MESSAGE_ADD_REMARK_SUCCESS
-            : MESSAGE_DELETE_REMARK_SUCCESS;
+        String message = !remark.value.isEmpty() ? MESSAGE_ADD_REMARK_SUCCESS : MESSAGE_DELETE_REMARK_SUCCESS;
         return String.format(message, personToEdit);
     }
 
@@ -92,6 +85,7 @@ public class RemarkCommand extends Command {
 
         // state check
         RemarkCommand e = (RemarkCommand) other;
-        return index.equals(e.index) && remark.equals(e.remark);
+        return index.equals(e.index)
+            && remark.equals(e.remark);
     }
 }
