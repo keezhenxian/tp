@@ -224,12 +224,25 @@ Finds contacts who are from the given country.
 
 Format: `findcountry COUNTRY`
 
-* The search is **case-sensitive**. e.g.,`Singapore` is a valid country but not `singapore`.
+* The search is **case-insensitive**. e.g.,`Singapore` is a valid country, as well as `singapore` and `sinGApore`.
 * Refer to the full list of valid country names in the help window.
   ![result for 'findcountry Singapore'](images/findcountry.png)
 
 Examples:
 * `findcountry Singapore`
+
+### Finding contacts by organisation: `findorganisation`
+
+Finds contacts who are from the given organisation.
+
+Format: `findorganisation ORGANISATION`
+
+* The search is **case-sensitive**. e.g.,`NUS` will return contacts that has Google as their organisation, not `nus`.
+* Refer to the full list of valid country names in the help window.
+  ![result for 'findorganisation NUS'](images/findorganisation.png)
+
+Examples:
+* `findorganisation NUS`
 
 ### Finding contacts by tag: `findtag`
 
@@ -382,6 +395,7 @@ Action | Format and Examples
 **Find** | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`
 **Find Country** | `findcountry COUNTRY`<br> e.g., `find Singapore`
 **Find Tag** | `findtag TAG [MORE_TAGS]`<br> e.g., `find friends`
+**Find Organisation** | `findorganisation ORGANISATION`<br> e.g., `find Google`
 **Archive** | `archive INDEX`<br> e.g., `archive 2`
 **Unarchive** | `unarchive INDEX`<br> e.g., `unarchive 1`
 **List Archived** | `archivelist`
